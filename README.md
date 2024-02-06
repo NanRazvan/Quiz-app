@@ -2,7 +2,7 @@
 
 ## Project Description
 
-QuizzyJava is a Java application developed using the Spring Boot framework to facilitate the creation and participation in quizzes. The application offers a user-friendly interface and supports various functionalities to enhance the quiz experience.
+QuizzyJava is a Java application developed using the Spring Boot framework to facilitate the creation and participation in quizzes. 
 
 ### Components
 
