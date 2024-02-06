@@ -1,4 +1,4 @@
-# QuizzyJava 📝🎉
+# QuizzyJava 📝
 
 ## Project Description
 
