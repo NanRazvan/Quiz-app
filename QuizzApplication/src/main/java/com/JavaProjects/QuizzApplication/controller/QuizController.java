@@ -1,6 +1,8 @@
 package com.JavaProjects.QuizzApplication.controller;
 
 import com.JavaProjects.QuizzApplication.Model.QuestionWrapper;
+import com.JavaProjects.QuizzApplication.Model.Quiz;
+import com.JavaProjects.QuizzApplication.Model.QuizWrapper;
 import com.JavaProjects.QuizzApplication.Model.Response;
 import com.JavaProjects.QuizzApplication.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +22,22 @@ public class QuizController {
             (@RequestParam String category, @RequestParam Integer numQ, @RequestParam String title ){
         return quizService.createQuiz(category, numQ, title);
     }
-    @GetMapping("get/{id}")
+    @GetMapping("getById/{id}")
     public ResponseEntity<List<QuestionWrapper>> qetQuizQuestions(@PathVariable Integer id){
         return quizService.getQuizQuestions(id);
     }
-    @PostMapping("submit/{id}")
+
+    @GetMapping("getByCategory/{category}")
+    public ResponseEntity<List<QuizWrapper>> getQuizzesByCategory(@PathVariable String category){
+        return quizService.getQuizzesByCategory(category);
+    }
+
+    @GetMapping("getAll")
+    public ResponseEntity<List<QuizWrapper>> getAllQuizzes() {
+        return quizService.getAllQuizzes();
+    }
+
+        @PostMapping("submit/{id}")
     public ResponseEntity<Integer> qetQuizResult(@PathVariable Integer id, @RequestBody List<Response> responses){
         return quizService.calculateResult(id,responses);
     }

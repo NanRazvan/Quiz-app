@@ -1,9 +1,6 @@
 package com.JavaProjects.QuizzApplication.service;
 
-import com.JavaProjects.QuizzApplication.Model.Question;
-import com.JavaProjects.QuizzApplication.Model.QuestionWrapper;
-import com.JavaProjects.QuizzApplication.Model.Quiz;
-import com.JavaProjects.QuizzApplication.Model.Response;
+import com.JavaProjects.QuizzApplication.Model.*;
 import com.JavaProjects.QuizzApplication.dao.QuestionDao;
 import com.JavaProjects.QuizzApplication.dao.QuizDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +26,7 @@ public class QuizService {
         Quiz quiz = new Quiz();
         quiz.setTitle(title);
         quiz.setQuestions(question);
-
+        quiz.setCategory(category);
         quizDao.save(quiz);
 
         return new ResponseEntity<>("Success", HttpStatus.OK);
@@ -59,5 +56,27 @@ public class QuizService {
                 score++;
         }
         return new ResponseEntity<>(score,HttpStatus.OK);
+    }
+
+    public ResponseEntity<List<QuizWrapper>> getQuizzesByCategory(String category) {
+        List<Quiz> quizzes = quizDao.findByCategory(category);
+        List<QuizWrapper> quizzesForUser= new ArrayList<QuizWrapper>();
+        for(Quiz quiz: quizzes)
+        {
+            QuizWrapper qw  = new QuizWrapper(quiz.getId(),quiz.getTitle(),quiz.getCategory());
+            quizzesForUser.add(qw);
+        }
+        return new ResponseEntity<>(quizzesForUser,HttpStatus.OK);
+    }
+
+    public ResponseEntity<List<QuizWrapper>> getAllQuizzes() {
+        List<Quiz> quizzes = quizDao.findAll();
+        List<QuizWrapper> quizzesForUser= new ArrayList<QuizWrapper>();
+        for(Quiz quiz: quizzes)
+        {
+            QuizWrapper qw  = new QuizWrapper(quiz.getId(),quiz.getTitle(),quiz.getCategory());
+            quizzesForUser.add(qw);
+        }
+        return new ResponseEntity<>(quizzesForUser,HttpStatus.OK);
     }
 }

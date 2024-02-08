@@ -1,7 +1,6 @@
 package com.JavaProjects.QuizzApplication.Model;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.Data;
 import java.util.List;
 
@@ -14,6 +13,7 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String title;
+    private String category;
 
     @ManyToMany
     private List<Question> questions;
