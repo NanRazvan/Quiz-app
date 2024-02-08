@@ -2,57 +2,58 @@
 
 ## Project Description
 
-QuizzyJava is a Java application developed using the Spring Boot framework to facilitate the creation and participation in quizzes. 
+QuizzyJava is a comprehensive application developed using the Spring Boot framework and enhanced with an Angular TypeScript web interface. This application is designed to facilitate the creation, management, and participation in quizzes, offering a robust platform for both quiz administrators and participants.
 
 ### Components
 
 #### 1. Question Management 📚
-   - Create, edit, and delete questions seamlessly.
-   - Categorize questions for better organization and filtering.
-   - Real-time updates ensure a smooth user experience.
-   - Modal for adding questions with mandatory fields.
-   - Form validation ensures data integrity.
+- Create, edit, and delete questions with ease.
+- Organize questions into categories for efficient management.
+- Experience real-time updates for a smooth user interface.
+- Use modals for adding questions with mandatory fields.
+- Employ form validation to maintain data integrity.
 
 #### 2. Quiz Creation 📝
-   - Generate quizzes with selected questions.
-   - Customize quizzes based on specific categories or themes.
+- Generate quizzes using selected questions.
+- Customize quizzes according to specific categories or themes.
 
 #### 3. Quiz Taking 🎯
-   - Participate in quizzes and submit responses.
-   - Calculate scores automatically upon quiz completion.
-   - Provide instant feedback on quiz results.
+- Engage in quizzes and submit responses.
+- Automatically calculate scores upon quiz completion.
+- Receive instant feedback on quiz performance.
+
+#### 4. Angular TypeScript Web Interface 🌐
+- Enjoy an interactive and responsive web interface for an immersive user experience.
+- Benefit from seamless backend integration for dynamic data interaction.
+- Navigate easily through a user-friendly design tailored for efficient quiz interaction.
 
 ## Backend
 
-The backend supports CRUD operations for managing quiz-related data, including:
+The backend supports CRUD (Create, Read, Update, Delete) operations for managing quiz-related data, encompassing:
 
-- **Questions**: Manage quiz questions.
-- **Quizzes**: Create and administer quizzes.
-- **QuizResponses**: Store user responses and calculate scores.
+- **Questions**: Handling of quiz questions.
+- **Quizzes**: Creation and administration of quizzes.
+- **QuizResponses**: Storage and computation of user responses and scores.
 
 ### Table Columns
 
-- **Questions**: id, question_text, options, correct_answer, category.
-- **Quizzes**: id, quiz_name, questions.
-- **QuizResponses**: id, quiz_id, user_id, responses, score.
+- **Questions**: `id`, `question_text`, `options`, `correct_answer`, `category`.
+- **Quizzes**: `id`, `quiz_name`, `questions`.
+- **QuizResponses**: `id`, `quiz_id`, `user_id`, `responses`, `score`.
+
+## Frontend
+
+The frontend, developed using Angular and TypeScript, provides:
+
+- A dynamic and responsive interface for a seamless user experience.
+- Intuitive navigation and interactive elements for easy access to various features.
+- Real-time interaction with the backend, ensuring up-to-date information and feedback.
 
 ## Technologies Used
 
-- **Java**: Core programming language.
-- **Spring Boot**: Framework for building Java-based applications.
-- **Spring Data JPA**: Simplifies data access with JPA in Spring applications.
-- **RESTful APIs**: For handling client-server communication.
-
-## Setup Instructions
-
-1. Clone the repository to your local machine.
-2. Configure the database settings in the application.properties file.
-3. Run the application using your preferred IDE or command line.
-4. Access the application through the provided endpoints.
-
-## Usage
-
-1. Navigate to the Question Management section to create, edit, or delete questions.
-2. Create quizzes by selecting questions from the available pool.
-3. Take quizzes and submit your responses to receive instant feedback.
-
+- **Java**: Primary programming language.
+- **Spring Boot**: Framework for creating Java-based applications.
+- **Spring Data JPA**: Data access simplification in Spring.
+- **RESTful APIs**: Client-server communication.
+- **Angular**: Open-source web application framework.
+- **TypeScript**: JavaScript superset for large-scale application development.
