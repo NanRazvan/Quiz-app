@@ -1,0 +1,3 @@
+[submodule "Quizz-app-UI"]
+	path = Quizz-app-UI
+	url = https://github.com/NanRazvan/Quiz-app.git
