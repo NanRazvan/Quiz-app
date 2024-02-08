@@ -1,0 +1,10 @@
+<div *ngIf="responseData !== undefined && totalQuestions !== undefined">
+    <h2 class="honk-font large-text" *ngIf="responseData > totalQuestions * 0.6">Congrats! You beat your opponent</h2>
+    <h2 class="honk-font large-text" *ngIf="!(responseData > totalQuestions * 0.6)">You lost!</h2>
+
+    <p class="result-text large-result" 
+       [ngClass]="{'green-text': responseData > totalQuestions * 0.6, 
+                   'red-text': !(responseData > totalQuestions * 0.6)}">
+      {{ responseData }} / {{ totalQuestions }}
+    </p>
+</div>

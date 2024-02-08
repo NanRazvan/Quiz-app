@@ -1,0 +1,17 @@
+.body-title-font {
+    font-family: 'Honk', system-ui;
+    font-size: 5rem;
+    margin-top: 1px;
+    margin-bottom: 100px;
+  }
+
+  .container button {
+    margin-top: 10px;
+}
+
+.vertical-space-start {
+    margin-bottom: 50px;
+}
+.vertical-space-administration {
+    margin-bottom: 100px;
+}

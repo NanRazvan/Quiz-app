@@ -1,0 +1,23 @@
+.question-title, .question-index {
+    font-family: 'Roboto Slab', serif;
+    font-size: larger; 
+    font-weight: 700; 
+  }
+  
+  .question-index {
+    font-family: 'Honk', sans-serif;
+    margin-right: 20px; 
+    font-size: xx-large;
+  }
+  
+  .answer-option {
+    font-family: 'Roboto Slab', serif;
+    font-size: smaller;
+  }
+
+  .next-button {
+    margin-top: 40px;
+    font-size: 1.2em; 
+    padding: 10px 20px; 
+    margin-top: 20px; 
+  }

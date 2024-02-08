@@ -1,0 +1,15 @@
+
+<div class="modal-content">
+  <h2 class="modal-title">Choose your opponent:</h2>
+
+  <mat-form-field class="form">
+    <mat-label class="centered-label">Opponents 👇🏻</mat-label>
+
+    <mat-select [(value)]="selectedQuizz">
+      <mat-option *ngFor="let quiz of quizzes" [value]="quiz">{{ quiz.title }}</mat-option>
+    </mat-select>
+
+  </mat-form-field>
+
+  <button mat-raised-button color="accent" class="start-button" (click)="navigateToQuizzPage()" [disabled]="!selectedQuizz">FIGHT</button>
+</div>

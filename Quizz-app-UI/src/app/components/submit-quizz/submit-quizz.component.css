@@ -1,0 +1,25 @@
+.honk-font {
+    font-family: 'Honk', sans-serif;
+  }
+  
+  .result-text {
+    font-family: 'Viga', sans-serif;
+  }
+  
+  .green-text {
+    color: green;
+  }
+  
+  .red-text {
+    color: red;
+  }
+
+  .large-text {
+    font-size: 4em; /* Example size, adjust as needed */
+  }
+  
+  .large-result {
+    margin-top: 60px;
+    font-size: 2em; /* Example size, adjust as needed */
+  }
+  

@@ -1,0 +1,40 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.body-title-font {
+    font-family: 'Honk', system-ui;
+    font-size: 5rem;
+    margin-top: 1px;
+    margin-bottom: 100px;
+  }
+  
+
+.container {
+    text-align: center;
+}
+
+
+h1 {
+    font-family: Arial, sans-serif;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Additional styles for button spacing */
+.container button {
+    margin-top: 10px;
+}
+
+.vertical-space-start {
+    margin-bottom: 50px;
+}
+.vertical-space-administration {
+    margin-bottom: 100px;
+}

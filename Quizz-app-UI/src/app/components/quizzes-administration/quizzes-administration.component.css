@@ -1,0 +1,19 @@
+/* quizzes-administration.component.css */
+.admin-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between cards */
+    padding: 20px;
+  }
+  
+  .admin-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adjust the gap between buttons */
+    padding: 20px;
+  }
+  
+  mat-card {
+    width: 300px; /* Adjust width as needed */
+  }
+  

@@ -1,0 +1,20 @@
+
+<div class="admin-container">
+    <mat-card class="admin-column">
+      <h2 class="viga-font" >Questions Management</h2>
+      <button mat-raised-button color="primary" (click)="addQuestion()">Add Question</button>
+      <button mat-raised-button color="primary" (click)="seeAllQuestions()">See All Questions</button>
+      <button mat-raised-button color="primary" (click)="seeQuestionsByCategory()">See Questions by Category</button>
+      <button mat-raised-button color="primary" (click)="updateQuestion()">Update Question</button>
+      <button mat-raised-button color="warn" (click)="deleteQuestion()">Delete Question</button>
+    </mat-card>
+  
+    <mat-card class="admin-column">
+      <h2 class="viga-font">Quizzes Management</h2>
+      <button mat-raised-button color="primary" (click)="createQuiz()">Create Quiz</button>
+      <button mat-raised-button color="primary" (click)="seeQuizzesByCategory()">See Quizzes by Category</button>
+      <button mat-raised-button color="primary" (click)="updateQuiz()">Update Quiz</button>
+      <button mat-raised-button color="warn" (click)="deleteQuiz()">Delete Quiz</button>
+    </mat-card>
+  </div>
+  
