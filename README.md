@@ -57,3 +57,41 @@ The frontend, developed using Angular and TypeScript, provides:
 - **RESTful APIs**: Client-server communication.
 - **Angular**: Open-source web application framework.
 - **TypeScript**: JavaScript superset for large-scale application development.
+
+## Project Setup
+
+Follow these steps to set up the QuizzyJava project on your local environment:
+
+### Prerequisites
+
+- Java (Version 8 or later)
+- PostgreSQL (Install and set up a local database server)
+- Node.js and npm (For Angular CLI and TypeScript)
+- Angular CLI
+
+### Database Setup
+
+1. **Prepare the PostgreSQL Database:**
+   - Ensure PostgreSQL is installed and running on your machine.
+   - Use the provided SQL query in `Quiz-app/DataBase-QuestionsData.txt` to create and populate the `Questions` table.
+   - Configure your database connection settings in the Spring Boot application properties file.
+
+### Backend Setup
+
+1. **Start the Backend Application:**
+   - Navigate to the backend application directory: `Quiz-app/QuizzApplication/src/main/java/com/JavaProjects/QuizzApplication`.
+   - Run the `QuizzApplication.java` file to start the Spring Boot application.
+   - Ensure the application connects successfully to your PostgreSQL database.
+
+### Frontend Setup
+
+1. **Configure and Run the Angular Frontend:**
+   - Navigate to the frontend directory: `Quiz-app/Quizz-app-UI`.
+   - Run `npm install` to install all the necessary Angular dependencies.
+   - Start the Angular application by running `ng serve`.
+   - Access the application in your browser at `http://localhost:4200`.
+
+### Verifying the Setup
+
+- Once both the backend and frontend are running, navigate to `http://localhost:4200` in your browser.
+- Test the functionality of the application by creating a quiz, adding questions, and taking a quiz.
