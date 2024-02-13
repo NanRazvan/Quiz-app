@@ -1,4 +1,4 @@
-package com.JavaProjects.QuizzApplication.Model;
+package com.JavaProjects.QuizzApplication.model;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

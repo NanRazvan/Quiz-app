@@ -1,9 +1,8 @@
 package com.JavaProjects.QuizzApplication.controller;
 
-import com.JavaProjects.QuizzApplication.Model.QuestionWrapper;
-import com.JavaProjects.QuizzApplication.Model.Quiz;
-import com.JavaProjects.QuizzApplication.Model.QuizWrapper;
-import com.JavaProjects.QuizzApplication.Model.Response;
+import com.JavaProjects.QuizzApplication.model.QuestionWrapper;
+import com.JavaProjects.QuizzApplication.model.QuizWrapper;
+import com.JavaProjects.QuizzApplication.model.Response;
 import com.JavaProjects.QuizzApplication.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,29 +15,31 @@ import java.util.List;
 public class QuizController {
 
     @Autowired
-    QuizService quizService;
+    private QuizService quizService;
+
     @PostMapping("create")
-    public ResponseEntity<String> createQuiz
-            (@RequestParam String category, @RequestParam Integer numQ, @RequestParam String title ){
-        return quizService.createQuiz(category, numQ, title);
+    public ResponseEntity<String> createQuiz(@RequestParam String category, @RequestParam Integer numQ, @RequestParam String title) {
+        quizService.createQuiz(category, numQ, title);
+        return ResponseEntity.ok("Quiz created successfully");
     }
+
     @GetMapping("getById/{id}")
-    public ResponseEntity<List<QuestionWrapper>> qetQuizQuestions(@PathVariable Integer id){
-        return quizService.getQuizQuestions(id);
+    public List<QuestionWrapper> getQuizQuestions(@PathVariable Integer id) {
+        return quizService.getQuizQuestions(id).getBody();
     }
 
     @GetMapping("getByCategory/{category}")
-    public ResponseEntity<List<QuizWrapper>> getQuizzesByCategory(@PathVariable String category){
-        return quizService.getQuizzesByCategory(category);
+    public List<QuizWrapper> getQuizzesByCategory(@PathVariable String category) {
+        return quizService.getQuizzesByCategory(category).getBody();
     }
 
     @GetMapping("getAll")
-    public ResponseEntity<List<QuizWrapper>> getAllQuizzes() {
-        return quizService.getAllQuizzes();
+    public List<QuizWrapper> getAllQuizzes() {
+        return quizService.getAllQuizzes().getBody();
     }
 
-        @PostMapping("submit/{id}")
-    public ResponseEntity<Integer> qetQuizResult(@PathVariable Integer id, @RequestBody List<Response> responses){
-        return quizService.calculateResult(id,responses);
+    @PostMapping("submit/{id}")
+    public Integer getQuizResult(@PathVariable Integer id, @RequestBody List<Response> responses) {
+        return quizService.calculateResult(id, responses).getBody();
     }
 }

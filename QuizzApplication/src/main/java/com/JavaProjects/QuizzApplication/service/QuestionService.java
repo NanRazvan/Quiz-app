@@ -1,69 +1,59 @@
 package com.JavaProjects.QuizzApplication.service;
 
-import com.JavaProjects.QuizzApplication.Model.Question;
+import com.JavaProjects.QuizzApplication.model.Question;
 import com.JavaProjects.QuizzApplication.dao.QuestionDao;
 import jakarta.persistence.EntityNotFoundException;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class QuestionService {
     @Autowired
-    QuestionDao questionDao;
+    private QuestionDao questionDao;
 
-    public ResponseEntity <List<Question>> getAllQuestions() {  // TODO: Exception handling
+    public List<Question> getAllQuestions() {
         try {
-            return new ResponseEntity<>(questionDao.findAll(), HttpStatus.OK);
+            return questionDao.findAll();
         } catch (Exception e) {
-            String errorMessage = "An error occurred while fetching questions: " + e.getMessage();
-            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new ServiceException("Error fetching all questions", e);
         }
     }
 
-    public ResponseEntity<List<Question>> getQuestionsByCategory(String category) { // TODO: Exception handling
-        try{
-            return new ResponseEntity<>(questionDao.findByCategory(category),HttpStatus.OK);
+    public List<Question> getQuestionsByCategory(String category) {
+        try {
+            return questionDao.findByCategory(category);
         } catch (Exception e) {
-            String errorMessage = "An error occurred while fetching questions: " + e.getMessage();
-            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new ServiceException("Error fetching questions for category: " + category, e);
         }
     }
 
-    public ResponseEntity<String> addQuestion(Question question) {
-        try{
+    public void addQuestion(Question question) {
+        try {
             questionDao.save(question);
-            return new ResponseEntity<>("Question added", HttpStatus.CREATED);
-        }catch(Exception e){
-            return new ResponseEntity<>("Error while adding the question", HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            throw new ServiceException("Error adding question", e);
         }
     }
 
-    public ResponseEntity<String> updateQuestion(Question question) {
-        try{
+    public void updateQuestion(Question question) {
+        try {
             questionDao.save(question);
-            return new ResponseEntity<>("Question updated", HttpStatus.CREATED);
-        }catch(Exception e){
-            return new ResponseEntity<>("Error while updating the question", HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            throw new ServiceException("Error updating question", e);
         }
     }
 
-    public ResponseEntity<String> deleteQuestion(Integer id) {
-        try{
-            if(!questionDao.existsById(id))
-                throw new EntityNotFoundException("Question with ID " + id + " not found");
-
+    public void deleteQuestion(Integer id) {
+        if (!questionDao.existsById(id)) {
+            throw new EntityNotFoundException("Question with ID " + id + " not found");
+        }
+        try {
             questionDao.deleteById(id);
-            return new ResponseEntity<>("Question deleted", HttpStatus.OK);
-        } catch (EntityNotFoundException e) {
-            return new ResponseEntity<>("Question not found", HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            throw new ServiceException("Error deleting question", e);
         }
-
-
     }
-
 }

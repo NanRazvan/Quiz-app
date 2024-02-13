@@ -1,8 +1,14 @@
 package com.JavaProjects.QuizzApplication.service;
 
-import com.JavaProjects.QuizzApplication.Model.*;
+import com.JavaProjects.QuizzApplication.model.Question;
+import com.JavaProjects.QuizzApplication.model.QuestionWrapper;
+import com.JavaProjects.QuizzApplication.model.Quiz;
+import com.JavaProjects.QuizzApplication.model.QuizWrapper;
+import com.JavaProjects.QuizzApplication.model.Response;
 import com.JavaProjects.QuizzApplication.dao.QuestionDao;
 import com.JavaProjects.QuizzApplication.dao.QuizDao;
+import jakarta.persistence.EntityNotFoundException;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,69 +20,73 @@ import java.util.Optional;
 
 @Service
 public class QuizService {
+
     @Autowired
     QuizDao quizDao;
 
     @Autowired
     QuestionDao questionDao;
 
-    public ResponseEntity<String> createQuiz(String category, Integer numQ, String title) {
-        List<Question> question = questionDao.findRandomQuestionsByCategory(category,numQ);
+    public void createQuiz(String category, Integer numQ, String title) {
+        List<Question> questionList = questionDao.findRandomQuestionsByCategory(category, numQ);
+        if (questionList.isEmpty()) {
+            throw new ServiceException("No questions found for the given category");
+        }
 
         Quiz quiz = new Quiz();
         quiz.setTitle(title);
-        quiz.setQuestions(question);
+        quiz.setQuestions(questionList);
         quiz.setCategory(category);
         quizDao.save(quiz);
 
-        return new ResponseEntity<>("Success", HttpStatus.OK);
+        ResponseEntity.status(HttpStatus.CREATED).body("Quiz created successfully");
     }
 
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(Integer id) {
-        Optional<Quiz> quiz = quizDao.findById(id);
-        List<Question> questionFromDB = quiz.get().getQuestions();
-        List<QuestionWrapper> questionForUser = new ArrayList<>();
-        for(Question q: questionFromDB)
-        {
-            QuestionWrapper qw = new QuestionWrapper
-                    (q.getId(),q.getQuestionTitle(),q.getOption1(), q.getOption2(), q.getOption3(),q.getOption4());
-            questionForUser.add(qw);
+        Optional<Quiz> optionalQuiz = quizDao.findById(id);
+        if (optionalQuiz.isPresent()) {
+            Quiz quiz = optionalQuiz.get();
+            List<Question> questions = quiz.getQuestions();
+            List<QuestionWrapper> questionWrappers = new ArrayList<>();
+            for (Question q : questions) {
+                QuestionWrapper questionWrapper = new QuestionWrapper(q.getId(), q.getQuestionTitle(), q.getOption1(), q.getOption2(), q.getOption3(), q.getOption4());
+                questionWrappers.add(questionWrapper);
+            }
+            return ResponseEntity.ok(questionWrappers);
+        } else {
+            throw new EntityNotFoundException("Quiz not found with ID: " + id);
         }
-
-        return new ResponseEntity<>(questionForUser,HttpStatus.OK);
     }
 
-
     public ResponseEntity<Integer> calculateResult(Integer id, List<Response> responses) {
-        Quiz quiz = quizDao.findById(id).get();
+        Quiz quiz = quizDao.findById(id).orElseThrow(() -> new EntityNotFoundException("Quiz not found with ID: " + id));
         List<Question> questions = quiz.getQuestions();
         int score = 0;
-        for(int i=0;i<responses.size();i++){
-            if(responses.get(i).getResponse().equals(questions.get(i).getRightAnswer()))
+        for (int i = 0; i < responses.size(); i++) {
+            if (responses.get(i).getResponse().equals(questions.get(i).getRightAnswer())) {
                 score++;
+            }
         }
-        return new ResponseEntity<>(score,HttpStatus.OK);
+        return ResponseEntity.ok(score);
     }
 
     public ResponseEntity<List<QuizWrapper>> getQuizzesByCategory(String category) {
         List<Quiz> quizzes = quizDao.findByCategory(category);
-        List<QuizWrapper> quizzesForUser= new ArrayList<QuizWrapper>();
-        for(Quiz quiz: quizzes)
-        {
-            QuizWrapper qw  = new QuizWrapper(quiz.getId(),quiz.getTitle(),quiz.getCategory());
-            quizzesForUser.add(qw);
+        List<QuizWrapper> quizWrappers = new ArrayList<>();
+        for (Quiz quiz : quizzes) {
+            QuizWrapper quizWrapper = new QuizWrapper(quiz.getId(), quiz.getTitle(), quiz.getCategory());
+            quizWrappers.add(quizWrapper);
         }
-        return new ResponseEntity<>(quizzesForUser,HttpStatus.OK);
+        return ResponseEntity.ok(quizWrappers);
     }
 
     public ResponseEntity<List<QuizWrapper>> getAllQuizzes() {
         List<Quiz> quizzes = quizDao.findAll();
-        List<QuizWrapper> quizzesForUser= new ArrayList<QuizWrapper>();
-        for(Quiz quiz: quizzes)
-        {
-            QuizWrapper qw  = new QuizWrapper(quiz.getId(),quiz.getTitle(),quiz.getCategory());
-            quizzesForUser.add(qw);
+        List<QuizWrapper> quizWrappers = new ArrayList<>();
+        for (Quiz quiz : quizzes) {
+            QuizWrapper quizWrapper = new QuizWrapper(quiz.getId(), quiz.getTitle(), quiz.getCategory());
+            quizWrappers.add(quizWrapper);
         }
-        return new ResponseEntity<>(quizzesForUser,HttpStatus.OK);
+        return ResponseEntity.ok(quizWrappers);
     }
 }

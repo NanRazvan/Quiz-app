@@ -1,6 +1,6 @@
 package com.JavaProjects.QuizzApplication.dao;
 
-import com.JavaProjects.QuizzApplication.Model.Question;
+import com.JavaProjects.QuizzApplication.model.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
