@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizzService } from '../../services/quizz.service';
+import { QuizzService } from '../../services/quizz-service/quizz.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';

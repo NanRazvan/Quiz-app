@@ -1,0 +1,24 @@
+.question-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
+  }
+  
+  .options-container {
+    grid-column: 1 / -1; 
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 10px;
+  }
+  
+  .form-field, .option-field {
+    width: 100%; 
+  }
+
+  .dialog-actions {
+    justify-content: flex-end; 
+  }
+
+  .spacer {
+    flex-grow: 1; 
+  }

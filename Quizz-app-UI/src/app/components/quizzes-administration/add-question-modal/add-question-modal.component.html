@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>Add New Question</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="questionForm" (ngSubmit)="submitQuestion()" class="question-form" >
+
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Question Title</mat-label>
+      <input matInput formControlName="questionTitle">
+      <mat-error *ngIf="questionForm.get('questionTitle')?.errors?.['required']">Required</mat-error>
+      <mat-error *ngIf="questionForm.get('questionTitle')?.errors?.['maxlength']">Max 255 characters</mat-error>
+    </mat-form-field>
+
+    <div class="options-container">
+    <div *ngFor="let option of ['option1', 'option2', 'option3', 'option4']" class="option-field">
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'Option ' + (option | slice: 6) }}</mat-label>
+        <input matInput [formControlName]="option">
+        <mat-error *ngIf="questionForm.get(option)?.errors?.['required']">Required</mat-error>
+        <mat-error *ngIf="questionForm.get(option)?.errors?.['maxlength']">Max 255 characters</mat-error>
+      </mat-form-field>
+    </div>
+    </div>
+
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Correct Answer</mat-label>
+      <input matInput formControlName="rightAnswer">
+      <mat-error *ngIf="questionForm.get('rightAnswer')?.errors?.['required']">Required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Difficulty Level</mat-label>
+      <mat-select formControlName="difficultyLevel">
+        <mat-option *ngFor="let level of difficultyLevels" [value]="level">{{ level }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Category</mat-label>
+      <input matInput formControlName="category">
+      <mat-error *ngIf="questionForm.get('category')?.errors?.['required']">Required</mat-error>
+    </mat-form-field>
+
+  </form>
+  <mat-dialog-actions class="dialog-actions">
+    <button mat-button mat-dialog-close class="left-button">Cancel</button>
+    <div class="spacer"></div>
+    <button mat-raised-button color="primary" [disabled]="!questionForm.valid" (click)="submitQuestion()">Submit</button>
+  </mat-dialog-actions>

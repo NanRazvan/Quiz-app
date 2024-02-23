@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
-import { QuizzService } from '../../../services/quizz.service';
+import { QuizzService } from '../../../services/quizz-service/quizz.service';
 
 @Component({
   selector: 'app-start-quizz-modal',

@@ -4,20 +4,29 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 import { Router } from '@angular/router';
 import {MatCardModule} from '@angular/material/card';
+import { RouterModule } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { AddQuestionModalComponent } from './add-question-modal/add-question-modal.component';
 
 @Component({
   selector: 'app-quizzes-administration',
   standalone: true,
-  imports: [MatButtonModule, MatDividerModule, MatIconModule,MatCardModule],
+  imports: [MatButtonModule, MatDividerModule, MatIconModule,MatCardModule,RouterModule],
   templateUrl: './quizzes-administration.component.html',
   styleUrl: './quizzes-administration.component.css'
 })
 export class QuizzesAdministrationComponent {
+
+  constructor(private router: Router,public dialog: MatDialog) {}
+  
    // Function to handle creating a new question
    addQuestion() {
-    // Implementation logic
-    console.log('Create Question');
+    this.dialog.open(AddQuestionModalComponent, {
+      width: '80%', // Adjust the width as needed
+      height: 'auto', // You can specify height or leave it to auto
+    });
   }
+  
 
   // Function to view all questions
   seeAllQuestions() {
